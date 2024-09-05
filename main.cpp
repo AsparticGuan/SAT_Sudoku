@@ -19,68 +19,67 @@ int main() {
 	clock_t start, finish;
 	while (op){
 		system("cls");
-		cout << "    ¥×¥í¥°¥é¥ß¥ó¥°¥³©`¥¹ÔOÓ‹¤Ø¤è¤¦¤³¤½   " << endl;
-		cout << "		  ¹¦ÄÜ²Ëµ¥                        " << endl;
+		cout << "		  åŠŸèƒ½èœå•                        " << endl;
 		cout << "-----------------------------------------" << endl;
-		cout << "1.¶ÁÈ¡cnfÎÄ¼ş	        2.±éÀúÊä³öÃ¿¸ö×Ó¾ä" << endl;
-		cout << "3.DPLLÇó½âËãÀı²¢±£´æ	4.Ë«Êı¶ÀÓÎÏ·  ¡¡  " << endl;
-		cout << "5.ÔËĞĞDPLLÔ­Ê¼°æ±¾£¨¼«´ó¿ÉÄÜ³¬Ê±£©       " << endl;
-		cout << "0.ÍË³ö                                   " << endl;
+		cout << "1.è¯»å–cnfæ–‡ä»¶	        2.éå†è¾“å‡ºæ¯ä¸ªå­å¥" << endl;
+		cout << "3.DPLLæ±‚è§£ç®—ä¾‹å¹¶ä¿å­˜	4.åŒæ•°ç‹¬æ¸¸æˆ  ã€€  " << endl;
+		cout << "5.è¿è¡ŒDPLLåŸå§‹ç‰ˆæœ¬ï¼ˆæå¤§å¯èƒ½è¶…æ—¶ï¼‰       " << endl;
+		cout << "0.é€€å‡º                                   " << endl;
 		cout << "-----------------------------------------" << endl;
-		cout << "ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~5]:                     " << endl;
+		cout << "è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~5]:                     " << endl;
 		cin >> op;
 		switch (op){
 		case 1:
-			printf("ÊäÈëÒª¶ÁÈ¡µÄcnfÎÄ¼ş:");
+			printf("è¾“å…¥è¦è¯»å–çš„cnfæ–‡ä»¶:");
 			scanf_s("%s", FileName, 1000);
 			func_result = Read_file(cnf);
-			if (!func_result) cout << "ÎÄ¼ş¶ÁÈëÊ±·¢Éú´íÎó" << endl;
-			else cout << "ÎÄ¼ş¶ÁÈë³É¹¦" << endl;
+			if (!func_result) cout << "æ–‡ä»¶è¯»å…¥æ—¶å‘ç”Ÿé”™è¯¯" << endl;
+			else cout << "æ–‡ä»¶è¯»å…¥æˆåŠŸ" << endl;
 			getchar(); getchar();
 			break;
 		case 2:
 			func_result = Print_expression(cnf);
-			if (!func_result) cout << "¹«Ê½Îª¿Õ" << endl;
-			else cout << endl << "¹«Ê½¶ÁÈ¡³É¹¦" << endl;
+			if (!func_result) cout << "å…¬å¼ä¸ºç©º" << endl;
+			else cout << endl << "å…¬å¼è¯»å–æˆåŠŸ" << endl;
 			getchar(); getchar();
 			break;
 		case 3:
-			start = clock();  //¼ÆÊ±¿ªÊ¼;
+			start = clock();  //è®¡æ—¶å¼€å§‹;
 			try {
 				func_result = DPLL_optimized(cnf);
 			}
 			catch (const std::exception&) {
-				cout << "½á¹û£º-1£¬ÔËËã³¬Ê±" << endl;
+				cout << "ç»“æœï¼š-1ï¼Œè¿ç®—è¶…æ—¶" << endl;
 				Destroy_expression(cnf);
 				getchar(); getchar();
 				break;
 			}
-			finish = clock();    //½áÊø
-			if (func_result == -1) cout << "¹«Ê½Îª¿Õ" << endl;
-			else if (func_result == false) cout << "½á¹û£º0£¬¹«Ê½²»¿ÉÂú×ã" << endl;
+			finish = clock();    //ç»“æŸ
+			if (func_result == -1) cout << "å…¬å¼ä¸ºç©º" << endl;
+			else if (func_result == false) cout << "ç»“æœï¼š0ï¼Œå…¬å¼ä¸å¯æ»¡è¶³" << endl;
 			else {
-				cout << "½á¹û£º1£¬¹«Ê½Âú×ã" << endl << "Çó½â½á¹û£º" << endl;
+				cout << "ç»“æœï¼š1ï¼Œå…¬å¼æ»¡è¶³" << endl << "æ±‚è§£ç»“æœï¼š" << endl;
 				for (int i = 1;i <= bool_amt;i++) {
 					if (result[i] == 0) cout << i << " ";
 					else cout << result[i] * i << " ";
 				}
 			}
-			time1 = (double)(finish - start) / CLOCKS_PER_SEC;//¼ÆËãÔËĞĞÊ±¼ä
-			cout << endl << "ÔËĞĞ" << time1 * 1000 << "ms½áÊø" << endl;//Êä³öÔËĞĞÊ±¼ä
-			if (Write_file(func_result, time1)) cout << "Ğ´Èë.resÎÄ¼ş³É¹¦" << endl;
+			time1 = (double)(finish - start) / CLOCKS_PER_SEC;//è®¡ç®—è¿è¡Œæ—¶é—´
+			cout << endl << "è¿è¡Œ" << time1 * 1000 << "msç»“æŸ" << endl;//è¾“å‡ºè¿è¡Œæ—¶é—´
+			if (Write_file(func_result, time1)) cout << "å†™å…¥.resæ–‡ä»¶æˆåŠŸ" << endl;
 			getchar(); getchar();
 			break;
 		case 5:
-			printf("ÊäÈëÒª¶ÁÈ¡µÄcnfÎÄ¼ş:");
+			printf("è¾“å…¥è¦è¯»å–çš„cnfæ–‡ä»¶:");
 			scanf_s("%s", FileName, 1000);
 			read_file();
-			cout << "ÎÄ¼ş¶ÁÈë³É¹¦" << endl;
+			cout << "æ–‡ä»¶è¯»å…¥æˆåŠŸ" << endl;
 			print_expression();
 			func_result = dpll(0,0);
-			if (func_result == -1) cout << "¹«Ê½Îª¿Õ" << endl;
-			else if (func_result == false) cout << "½á¹û£º0£¬¹«Ê½²»¿ÉÂú×ã" << endl;
+			if (func_result == -1) cout << "å…¬å¼ä¸ºç©º" << endl;
+			else if (func_result == false) cout << "ç»“æœï¼š0ï¼Œå…¬å¼ä¸å¯æ»¡è¶³" << endl;
 			else {
-				cout << "½á¹û£º1£¬¹«Ê½Âú×ã" << endl << "Çó½â½á¹û£º" << endl;
+				cout << "ç»“æœï¼š1ï¼Œå…¬å¼æ»¡è¶³" << endl << "æ±‚è§£ç»“æœï¼š" << endl;
 				for (int i = 1;i <= bool_amt;i++) {
 					if (result[i] == 0) cout << i << " ";
 					else cout << result[i] * i << " ";
@@ -93,14 +92,14 @@ int main() {
 			sdkop = 1;
 			while (sdkop) {
 				system("cls");
-				cout << "          Êı×Ö¤Ï¶ÀÉí¤ËÏŞ¤ë!              " << endl;
-				cout << "              ¹¦ÄÜ²Ëµ¥                   " << endl;
+				cout << "          æ•°å­—ã¯ç‹¬èº«ã«é™ã‚‹!              " << endl;
+				cout << "              åŠŸèƒ½èœå•                   " << endl;
 				cout << "-----------------------------------------" << endl;
-				cout << "1.Éú³ÉÊı¶À	        2.½â¾öÊı¶À£¨Íæ¼Ò£©    " << endl;
-				cout << "3.±£´æ³ÉcnfÎÄ¼ş	4.½â¾öÊı¶À£¨µçÄÔ£©¡¡  " << endl;
-				cout << "0.ÍË³ö                                   " << endl;
+				cout << "1.ç”Ÿæˆæ•°ç‹¬	        2.è§£å†³æ•°ç‹¬ï¼ˆç©å®¶ï¼‰    " << endl;
+				cout << "3.ä¿å­˜æˆcnfæ–‡ä»¶	4.è§£å†³æ•°ç‹¬ï¼ˆç”µè„‘ï¼‰ã€€  " << endl;
+				cout << "0.é€€å‡º                                   " << endl;
 				cout << "-----------------------------------------" << endl;
-				cout << "ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~4]:                     " << endl;
+				cout << "è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~4]:                     " << endl;
 				cin >> sdkop;
 				switch (sdkop){
 				case 1:
@@ -115,20 +114,20 @@ int main() {
 							answer2[i][j] = sudoku2[i][j];
 						}
 					}
-					cout << "Êı¶ÀÒÑÉú³É£¬Çë°´enterºóÑ¡Ôñ2¿ªÊ¼ÓÎÏ·" << endl;
+					cout << "æ•°ç‹¬å·²ç”Ÿæˆï¼Œè¯·æŒ‰enteråé€‰æ‹©2å¼€å§‹æ¸¸æˆ" << endl;
 					getchar(); getchar();
 					break;
 				case 2:
-					//ĞÎ³É½»»¥½çÃæ
+					//å½¢æˆäº¤äº’ç•Œé¢
 					while (true) {
 						system("cls");
 						Print_twodoku(sudoku1,sudoku2);
-						cout << "ÇëÊäÈëÆåÅÌ±àºÅ£¨×óÉÏ½ÇÎª1£¬ÓÒÏÂ½ÇÎª2£©¡¢ĞĞºÅ£¨1~9£©£¬ÁĞºÅ£¨1~9£©ÓëÊäÈëµÄÊı×Ö£º" << endl;
-						cout << "ÍË³öÇëÊäÈë0 0 0 0" << endl;
+						cout << "è¯·è¾“å…¥æ£‹ç›˜ç¼–å·ï¼ˆå·¦ä¸Šè§’ä¸º1ï¼Œå³ä¸‹è§’ä¸º2ï¼‰ã€è¡Œå·ï¼ˆ1~9ï¼‰ï¼Œåˆ—å·ï¼ˆ1~9ï¼‰ä¸è¾“å…¥çš„æ•°å­—ï¼š" << endl;
+						cout << "é€€å‡ºè¯·è¾“å…¥0 0 0 0" << endl;
 						cin >> area >> row >> col >> num;
 						if (area == 0) break;
 						if (area < 1 || area > 2 || row < 1 || row > 9 || col < 1 || col > 9 || num < 1 || num > 9) {
-							cout << "ÇëÕıÈ·ÊäÈë" << endl;
+							cout << "è¯·æ­£ç¡®è¾“å…¥" << endl;
 							getchar();getchar();
 							continue;
 						}
@@ -141,42 +140,42 @@ int main() {
 				case 3:
 					if (cnf != NULL) Destroy_expression(cnf);
 					Twodoku_to_cnf();
-					cout << "±£´æ³É¹¦" << endl;
+					cout << "ä¿å­˜æˆåŠŸ" << endl;
 					is_saved = true;
 					getchar(); getchar();
 					break;
 				case 4:
-					if (!is_saved) cout << "ÇëÏÈ½«Êı¶À±£´æÎª.cnfÎÄ¼ş" << endl;
-					strcpy(FileName, "D:\\×Ü¿â\\Ñ§Ï°\\×÷Òµ\\³ÌĞòÉè¼Æ×ÛºÏ¿ÎÉè\\¹Ù°ÍÍ¼_U202113897_³ÌĞòÉè¼Æ×ÛºÏ¿ÎÉè\\twodoku.cnf");
+					if (!is_saved) cout << "è¯·å…ˆå°†æ•°ç‹¬ä¿å­˜ä¸º.cnfæ–‡ä»¶" << endl;
+					strcpy(FileName, "D:\\æ€»åº“\\å­¦ä¹ \\ä½œä¸š\\ç¨‹åºè®¾è®¡ç»¼åˆè¯¾è®¾\\å®˜å·´å›¾_U202113897_ç¨‹åºè®¾è®¡ç»¼åˆè¯¾è®¾\\twodoku.cnf");
 					func_result = Read_file(cnf);
 					if (!func_result) {
-						cout << "ÎÄ¼ş¶ÁÈëÊ±·¢Éú´íÎó" << endl;
+						cout << "æ–‡ä»¶è¯»å…¥æ—¶å‘ç”Ÿé”™è¯¯" << endl;
 						break;
 						getchar();getchar();
 					}
-					start = clock();  //¼ÆÊ±¿ªÊ¼;
+					start = clock();  //è®¡æ—¶å¼€å§‹;
 					try {
 						func_result = DPLL_optimized(cnf);
 					}
 					catch (const std::exception&) {
-						cout << "½á¹û£º-1£¬ÔËËã³¬Ê±" << endl;
+						cout << "ç»“æœï¼š-1ï¼Œè¿ç®—è¶…æ—¶" << endl;
 						getchar(); getchar();
 						break;
 					}
-					finish = clock();    //½áÊø
-					if (func_result == -1) cout << "¹«Ê½Îª¿Õ" << endl;
-					else if (func_result == false) cout << "½á¹û£º0£¬¹«Ê½²»¿ÉÂú×ã" << endl;
+					finish = clock();    //ç»“æŸ
+					if (func_result == -1) cout << "å…¬å¼ä¸ºç©º" << endl;
+					else if (func_result == false) cout << "ç»“æœï¼š0ï¼Œå…¬å¼ä¸å¯æ»¡è¶³" << endl;
 					else {
-						cout << "½á¹û£º1£¬¹«Ê½Âú×ã" << endl << "Çó½â½á¹û£º" << endl;
+						cout << "ç»“æœï¼š1ï¼Œå…¬å¼æ»¡è¶³" << endl << "æ±‚è§£ç»“æœï¼š" << endl;
 						for (int i = 1;i <= bool_amt;i++) {
 							if (result[i] == 0) cout << i << " ";
 							else cout << result[i] * i << " ";
 						}
 					}
-					time1 = (double)(finish - start) / CLOCKS_PER_SEC;//¼ÆËãÔËĞĞÊ±¼ä
-					cout << endl << "ÔËĞĞ" << time1 * 1000 << "ms½áÊø" << endl;//Êä³öÔËĞĞÊ±¼ä
-					if (Write_file(func_result, time1)) cout << "Ğ´Èë.resÎÄ¼ş³É¹¦" << endl;
-					cout << "×îÖÕ½á¹û£º" << endl;
+					time1 = (double)(finish - start) / CLOCKS_PER_SEC;//è®¡ç®—è¿è¡Œæ—¶é—´
+					cout << endl << "è¿è¡Œ" << time1 * 1000 << "msç»“æŸ" << endl;//è¾“å‡ºè¿è¡Œæ—¶é—´
+					if (Write_file(func_result, time1)) cout << "å†™å…¥.resæ–‡ä»¶æˆåŠŸ" << endl;
+					cout << "æœ€ç»ˆç»“æœï¼š" << endl;
 					for (int i = 1;i <= 1458;i++) {
 						if (result[i] >= 0 && i <= 729) {
 							row = i / 81;
